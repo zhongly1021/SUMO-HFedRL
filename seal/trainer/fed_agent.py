@@ -74,6 +74,7 @@ class FedPolicyTrainer(BaseTrainer):
                            if policy_id != GLOBAL_POLICY_VAR}
             new_weights = self.fedavg(policy_dict)
             for policy_id in self.policies:
+                ## If not directly updated to the new weight, change here ##
                 self.ray_trainer.get_policy(policy_id).set_weights(new_weights)
 
     def on_policy_setup(self) -> Dict[str, Tuple[Any]]:
@@ -91,6 +92,9 @@ class FedPolicyTrainer(BaseTrainer):
         }
 
     def fedavg(self, policy_dict: Dict[str, Policy], C: float=1.0) -> Weights:
+        # if want to implement the aggregate policy, we need to change this part(FedProx/Fed....)
+
+        
         # Step 1: Compute the coefficients for each policy in the system based on reward.
         weight_keys = next(iter(policy_dict.values())).get_weights().keys()
         total_reward = abs(sum(self.reward_tracker.values()))
