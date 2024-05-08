@@ -81,6 +81,9 @@ class FedPolicyTrainer(BaseTrainer):
         dummy_env = self.env(config=self.env_config_fn())
         obs_space = dummy_env.observation_space
         act_space = dummy_env.action_space
+        '''
+        using self.env._get_reward/_observe,_do_action
+        '''
         return {
             agent_id: (
                 self.policy_type,
