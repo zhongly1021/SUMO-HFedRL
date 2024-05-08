@@ -72,6 +72,8 @@ class FedPolicyTrainer(BaseTrainer):
             policy_dict = {policy_id: self.ray_trainer.get_policy(policy_id)
                            for policy_id in self.policies
                            if policy_id != GLOBAL_POLICY_VAR}
+            
+            ### when agents are trained, the fedavg will be used ###
             new_weights = self.fedavg(policy_dict)
             for policy_id in self.policies:
                 ## If not directly updated to the new weight, change here ##
